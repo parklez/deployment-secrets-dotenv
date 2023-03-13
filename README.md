@@ -39,6 +39,8 @@ Options:
   --env-output TEXT  Path to output environment file. Default: '.env'
   --deployment TEXT  Path to Deployment "*.yml" folder, not the file! Default:
                      "./.travis"
+  --deploy-env TEXT   Replaces "$DEPLOY_ENV" in "name" key from secret.
+                      Default: "dev".
   --help             Show this message and exit.
 ```
 ```sh
@@ -56,6 +58,8 @@ Options:
   --env-output TEXT   Path to output environment file. Default: '.env'
   --deployment TEXT   Path to Deployment "*.yml" folder, not the file!
                       Default: "./.travis"
+  --deploy-env TEXT   Replaces "$DEPLOY_ENV" in "name" key from secret.
+                      Default: "dev".
   --help              Show this message and exit.
 ```
 ```sh
