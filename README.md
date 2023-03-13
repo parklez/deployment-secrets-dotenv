@@ -32,8 +32,8 @@ my-app-example/
 ```
 #### A. Fetch (deployment secrets) and write into .env file
 ```
-$ secrets write-pod-env --help                                                                         
-Usage: secrets write-pod-env [OPTIONS]
+$ secrets write-deployment-env --help                                                                         
+Usage: secrets write-deployment-env [OPTIONS]
 
 Options:
   --env-output TEXT  Path to output environment file. Default: '.env'
@@ -44,7 +44,7 @@ Options:
   --help             Show this message and exit.
 ```
 ```sh
-$ secrets write-pod-env --deployment <path to deployment.yml folder> --env-output <path to .env output>
+$ secrets write-deployment-env --deployment <path to deployment.yml folder> --env-output <path to .env output>
 ```
 
 #### B. Fetch (deployment secrets) and fullfil .env-example template into .env file
@@ -64,6 +64,20 @@ Options:
 ```
 ```sh
 $ secrets write-from-example --deployment <path to deployment.yml folder> --env-example <path to .env-example template> --env-output <path to .env output>
+```
+
+#### C. Fetch "env" from running pod and save into .env file
+```
+$ secrets write-pod-env --help                                                                 
+Usage: secrets write-pod-env [OPTIONS]
+
+Options:
+  --pod TEXT         Pod name. Example: "my-cool-app-1234".
+  --env-output TEXT  Path to output environment file. Default: '.env-<pod>'
+  --help             Show this message and exit.
+```
+```sh
+$ secrets write-pod-env --pod <my-cool-app-1234> --env-output <path to .env output>
 ```
 
 #### Further reading 📝

@@ -121,8 +121,25 @@ def write_deployment_env(env_output: str, deployment: str, deploy_env: str) -> N
     _write_deployment_env(decoded_variables, env_output)
 
 
+@click.command()
+@click.option('--pod', help='Pod name. Example: "my-cool-app-1234".')
+@click.option('--env-output', help="Path to output environment file. Default: '.env-<pod>'")
+def write_pod_env(pod: str, env_output: str) -> None:
+    variables = subprocess.run(
+            ['kubectl', 'exec', '-it', pod, '--', '/bin/bash', '-c', 'env'], capture_output=True)
+    variables = variables.stdout.decode('utf-8').split('\r\n')
+
+    if not env_output:
+        env_output = f'.env-{pod}'
+
+    with open(env_output, 'w') as f:
+        for line in variables:
+            f.write(line + '\n')
+
+
 cli.add_command(write_from_example)
 cli.add_command(write_deployment_env)
+cli.add_command(write_pod_env)
 
 if __name__ == '__main__':
     cli()
