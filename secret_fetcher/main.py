@@ -40,7 +40,7 @@ def _write_from_example(variables: list, env_reference: str, env_output='.env') 
             continue
         value = list(filter(lambda item: item.get(
             'name') == pair[0], variables))
-        if value:
+        if value and value[0].get('value'):
             env_output.write(f'{pair[0]}={value[0]["value"]}' + '\n')
         else:
             env_output.write(line)
