@@ -8,7 +8,7 @@ import click
 
 
 def retrieve_files_pathlib(path: str) -> list:
-    return [file for file in pathlib.Path(path).rglob('*.yml')]
+    return [file for file in pathlib.Path(path).rglob('*.y*ml')]
 
 
 def decode_secrets(secret_name: str, secret_values: dict, variables: list) -> list:
