@@ -1,36 +1,34 @@
 # deployment-secrets-dotenv
-An automated way to get your projects up and running by fetching all the secrets necessary from Kubernetes, writing them into an .env file.
+Simple CLI that fetches deployment/cronjob YAML secrets from Kubernetes/OpenShift and writes them down into an `.env` file.
 
-<p align="center">
-  <img src="front.png">
-</p>
-
-- Kubernetes has a feature called Secrets <> where system administrators can store environment variables for their applications. These secrets are stored in base64 and can be accessed one by one using CLI commands OR by using an UI interface.
-- It's a time consuming and painstaking process to setup multiple applications to run **locally** by what Kubernetes offers alone (manually CTRL+C -> CTRL+V from UI or CLI).
-- This small CLI tool I made reads a given deployment.yml file and fetches each necessary secret, decodes them, and writes into a dotenv file which many developers use to run applications locally.
+![diagram](diagram.png)
 
 ## Requirements  🛠
- - Python 3.7 - 3.10
- - Kubernetes CLI (kubectl)
+ - Python 3.7 - 3.12
+ - Kubernetes CLI (kubectl) or OpenShift (oc)
 
 ## Installing  ⚙️
-Clone this repository and using a terminal window, write the following:
 ```sh
-pip3 install .
+pip install git+https://github.com/parklez/deployment-secrets-dotenv.git
 ```
 This way the tool is globally available in your machine via terminal.
 
 ## How to use?  📖
+- 💡You must be logged into a cluster & have permission to read its secrets!💡
 
-This script was made with this structure in mind (you might have something similar)
+This script was made with this structure in mind (you might have something similar)\
+You may specify the location of any of these files using parameters.
 
 ```sh
 my-app-example/
 |-- .travis/
-|   |-- deployment"*.yml"
+|   |-- deployment*.ym*l
 |-- .env-example
 ```
-#### A. Fetch (deployment secrets) and write into .env file
+
+- Choose one of the ways of fulfilling your `.env` file below 👇
+
+#### A. Write all secrets from `deployment.yml` into `.env`:
 ```
 $ secrets write-deployment-env --help                                                                         
 Usage: secrets write-deployment-env [OPTIONS]
@@ -47,7 +45,7 @@ Options:
 $ secrets write-deployment-env --deployment <path to deployment.yml folder> --env-output <path to .env output>
 ```
 
-#### B. Fetch (deployment secrets) and fullfil .env-example template into .env file
+#### B. Fetch (deployment secrets) and fullfil .env-example template into .env file:
 ```
 $ secrets write-from-example --help
 Usage: secrets write-from-example [OPTIONS]
@@ -66,7 +64,7 @@ Options:
 $ secrets write-from-example --deployment <path to deployment.yml folder> --env-example <path to .env-example template> --env-output <path to .env output>
 ```
 
-#### C. Fetch "env" from running pod and save into .env file
+#### C. Fetch "env" from running pod and save into .env file:
 ```
 $ secrets write-pod-env --help                                                                 
 Usage: secrets write-pod-env [OPTIONS]
@@ -82,10 +80,7 @@ $ secrets write-pod-env --pod <my-cool-app-1234> --env-output <path to .env outp
 
 #### Further reading 📝
 
-https://python-packaging-tutorial.readthedocs.io/en/latest/setup_py.html
-
-https://medium.com/nerd-for-tech/how-to-build-and-distribute-a-cli-tool-with-python-537ae41d9d78
-
-https://github.com/pypa/sampleproject
-
-https://packaging.python.org/en/latest/tutorials/packaging-projects/
+- https://python-packaging-tutorial.readthedocs.io/en/latest/setup_py.html
+- https://medium.com/nerd-for-tech/how-to-build-and-distribute-a-cli-tool-with-python-537ae41d9d78
+- https://github.com/pypa/sampleproject
+- https://packaging.python.org/en/latest/tutorials/packaging-projects/
