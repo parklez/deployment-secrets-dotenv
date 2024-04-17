@@ -55,7 +55,7 @@ def _write_deployment_env(variables: list, env_output='.env') -> None:
             f.write(f'{variable.get("name")}={variable.get("value")}' + '\n')
 
 
-def resolve_variables(variables: list) -> list:
+def resolve_variables(variables: list, cli: str) -> list:
     """Iterates over the list of variables, and for each variable (dict),
     checks if it uses a secret from the cluster & is not yet fulfilled,
     if this condition meets, it fetches the dict of secrets from
@@ -71,7 +71,7 @@ def resolve_variables(variables: list) -> list:
         if not secret_name or has_value:
             continue
         value = subprocess.run(
-            ['kubectl', 'get', 'secret', secret_name, '-o', 'json'], capture_output=True)
+            [cli, 'get', 'secret', secret_name, '-o', 'json'], capture_output=True)
         try:
             value = json.loads(value.stdout)
         except json.decoder.JSONDecodeError:
@@ -135,11 +135,12 @@ def cli():
 @click.option('--env-output', default='.env', help="Path to output environment file. Default: '.env'")
 @click.option('--deployment', default='.travis', help='Path to Deployment "*.yml" folder, not the file! Default: "./.travis"')
 @click.option('--deploy-env', default='dev', help='Replaces "$DEPLOY_ENV" in "name" key from secret. Default: "dev".')
-def write_from_example(env_example: str, env_output: str, deployment: str, deploy_env: str) -> None:
+@click.option('--cli', default='kubectl', help='The CLI to use ("kubectl" for Kubernetes, "oc" for OpenShift) Default: "kubectl".')
+def write_from_example(env_example: str, env_output: str, deployment: str, deploy_env: str, cli: str) -> None:
     variables = get_variables_from_file(deployment)
     variables = replace_deploy_env_suffix(variables, deploy_env)
     # Expands each object with decoded values
-    decoded_variables = resolve_variables(variables)
+    decoded_variables = resolve_variables(variables, cli)
     _write_from_example(decoded_variables, env_example, env_output)
 
 
@@ -147,20 +148,22 @@ def write_from_example(env_example: str, env_output: str, deployment: str, deplo
 @click.option('--env-output', default='.env', help="Path to output environment file. Default: '.env'")
 @click.option('--deployment', default='.travis', help='Path to Deployment "*.yml" folder, not the file! Default: "./.travis"')
 @click.option('--deploy-env', default='dev', help='Replaces "$DEPLOY_ENV" in "name" key from secret. Default: "dev".')
-def write_deployment_env(env_output: str, deployment: str, deploy_env: str) -> None:
+@click.option('--cli', default='kubectl', help='The CLI to use ("kubectl" for Kubernetes, "oc" for OpenShift) Default: "kubectl".')
+def write_deployment_env(env_output: str, deployment: str, deploy_env: str, cli: str) -> None:
     variables = get_variables_from_file(deployment)
     variables = replace_deploy_env_suffix(variables, deploy_env)
     # Expands each object with decoded values
-    decoded_variables = resolve_variables(variables)
+    decoded_variables = resolve_variables(variables, cli)
     _write_deployment_env(decoded_variables, env_output)
 
 
 @click.command()
 @click.option('--pod', help='Pod name. Example: "my-cool-app-1234".')
 @click.option('--env-output', help="Path to output environment file. Default: '.env-<pod>'")
-def write_pod_env(pod: str, env_output: str) -> None:
+@click.option('--cli', default='kubectl', help='The CLI to use ("kubectl" for Kubernetes, "oc" for OpenShift) Default: "kubectl".')
+def write_pod_env(pod: str, env_output: str, cli: str) -> None:
     variables = subprocess.run(
-            ['kubectl', 'exec', '-it', pod, '--', '/bin/bash', '-c', 'env'], capture_output=True)
+            [cli, 'exec', '-it', pod, '--', '/bin/bash', '-c', 'env'], capture_output=True)
     variables = variables.stdout.decode('utf-8').split('\r\n')
 
     if not env_output:

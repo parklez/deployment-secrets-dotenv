@@ -1,0 +1,41 @@
+<mxfile host="app.diagrams.net" modified="2024-04-17T17:36:21.403Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36" etag="C90sfV5Kc60AwScqaHx1" version="24.2.5" type="device">
+  <diagram name="Page-1" id="yXxjfOVtlhnhg67_EdTy">
+    <mxGraphModel dx="536" dy="353" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="YLMBD6iPqBAcYFP3bMrh-10" value="" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=solid;glass=0;shadow=1;fillColor=none;strokeColor=#4D4D4D;fontColor=#333333;" parent="1" vertex="1">
+          <mxGeometry x="130" y="140" width="380" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="YLMBD6iPqBAcYFP3bMrh-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=1;shadow=1;flowAnimation=0;" parent="1" source="YLMBD6iPqBAcYFP3bMrh-1" target="YLMBD6iPqBAcYFP3bMrh-2" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="200" y="310" />
+              <mxPoint x="320" y="310" />
+              <mxPoint x="320" y="150" />
+              <mxPoint x="440" y="150" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YLMBD6iPqBAcYFP3bMrh-1" value="" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#fff2cc;strokeColor=#d6b656;shadow=1;" parent="1" vertex="1">
+          <mxGeometry x="160" y="180" width="80" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="YLMBD6iPqBAcYFP3bMrh-2" value="" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;shadow=1;" parent="1" vertex="1">
+          <mxGeometry x="400" y="180" width="80" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="YLMBD6iPqBAcYFP3bMrh-4" value="Deployment YAML" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;shadow=1;" parent="1" vertex="1">
+          <mxGeometry x="140" y="150" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="YLMBD6iPqBAcYFP3bMrh-5" value=".env file" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;shadow=1;" parent="1" vertex="1">
+          <mxGeometry x="380" y="290" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="YLMBD6iPqBAcYFP3bMrh-8" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;env:&lt;/font&gt;&lt;div style=&quot;font-size: 8px;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&amp;nbsp;- name: DEBUG&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 8px;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&amp;nbsp; &amp;nbsp;valueFrom:&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 8px;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&amp;nbsp; &amp;nbsp; secretKeyRef:&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 8px;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;name: app-secrets&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 8px;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;key: debuglevel&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;rounded=0;fontColor=#4D4D4D;labelBorderColor=none;textShadow=0;fontSize=8;shadow=1;" parent="1" vertex="1">
+          <mxGeometry x="160" y="180" width="80" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="YLMBD6iPqBAcYFP3bMrh-9" value="HOST=&quot;&quot;&lt;div&gt;PORT=&quot;&quot;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;API_KEY=&quot;&quot;&lt;/div&gt;&lt;div&gt;DEBUG=&quot;false&quot;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;rounded=0;fontColor=#4D4D4D;labelBorderColor=none;textShadow=0;fontSize=8;shadow=0;" parent="1" vertex="1">
+          <mxGeometry x="400" y="180" width="80" height="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

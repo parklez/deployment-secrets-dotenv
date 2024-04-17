@@ -8,7 +8,7 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="secret_fetcher",  # Required
-    version="0.2.4",  # Required
+    version="0.3.0",  # Required
     description="Fetch deployment variables from kubernetes and write local .env file.",  # Optional
     long_description=long_description,  # Optional
     long_description_content_type="text/markdown",  # Optional (see note above)
@@ -28,7 +28,7 @@ setup(
     keywords="kubernetes, secrets, dotenv",  # Optional
     packages=find_packages(),  # Required
     python_requires=">=3.7, <4",
-    install_requires=["click", "pyyaml"],  # Optional
+    install_requires=["click<9", "pyyaml<7"],  # Optional
     entry_points={
         'console_scripts': [
             'secrets=secret_fetcher.main:cli'
